@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WPRBSubRedditRSS\Validators;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-declare(strict_types=1);
+
 
 /**
  * Ajax Handler Class
