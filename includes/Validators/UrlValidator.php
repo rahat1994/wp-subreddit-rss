@@ -6,6 +6,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+declare(strict_types=1);
+
 /**
  * Ajax Handler Class
  * @since 1.0.0
@@ -13,18 +15,20 @@ if (!defined('ABSPATH')) {
 class UrlValidator
 {
 
-    public function validate($url){
-        if(filter_var($url, FILTER_VALIDATE_URL)){
+    public function validate($url)
+    {
+        if (filter_var($url, FILTER_VALIDATE_URL)) {
             return true;
-        } else{
+        } else {
             error_log('error');
             set_transient('my_meta_box_error', 'The custom field cannot be empty.', 30);
-            add_action('admin_notices', array($this,'addAdminNotice'), 10);
+            add_action('admin_notices', array($this, 'addAdminNotice'), 10);
             return false;
         }
     }
 
-    public function addAdminNotice(){
+    public function addAdminNotice()
+    {
         error_log('this is an eror');
         $message = get_transient('my_meta_box_error');
         if ($message) {
@@ -33,5 +37,4 @@ class UrlValidator
             delete_transient('my_meta_box_error');
         }
     }
-
 }

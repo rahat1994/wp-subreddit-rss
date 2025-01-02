@@ -1,0 +1,15 @@
+{
+    "name": "rahat/wp-subreddit-rss",
+    "authors": [
+        {
+            "name": "Rahat Baksh",
+            "email": "rahat392@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "WPRBSubRedditRSS\\": "includes/"
+        }
+    }
+}

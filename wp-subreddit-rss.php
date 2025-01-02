@@ -8,49 +8,55 @@
  * Text Domain: wprb-subreddit-rss
  */
 
+
+
 defined('ABSPATH') or die;
 
 define('WPRBSUBREDDITRSS_URL', plugin_dir_url(__FILE__));
 define('WPRBSUBREDDITRSS_DIR', plugin_dir_path(__FILE__));
+
+require WPRBSUBREDDITRSS_DIR . '/vendor/autoload.php';
 
 define('WPRBSUBREDDITRSS_VERSION', '1.0.5');
 
 // This will automatically update, when you run dev or production
 define('WPRBSUBREDDITRSS_DEVELOPMENT', true);
 
-class WPRBSUBREDDITRSS {
+class WPRBSUBREDDITRSS
+{
 
-    public function boot(){
-        $this->registerClasses();
+    public function boot()
+    {
+
+
+        // $this->registerClasses();
         $this->registerActivationHook();
         $this->registerDeactivationHook();
         $this->renderAdminMenu();
         $this->registerRedditFeedCPT();
     }
 
-    public function registerClasses(){
+    public function registerClasses()
+    {
         require WPRBSUBREDDITRSS_DIR . 'includes/autoload.php';
     }
 
-    public function registerActivationHook(){
+    public function registerActivationHook()
+    {
         register_activation_hook(__FILE__, function ($newWorkWide) {
-            require_once(WPRBSUBREDDITRSS_DIR . 'includes/Classes/PluginActivator.php');
             $activator = new \WPRBSubRedditRSS\Classes\PluginActivator();
             $activator->migrateDatabases($newWorkWide);
         });
     }
 
-    public function registerRedditFeedCPT(){
+    public function registerRedditFeedCPT()
+    {
         require_once(WPRBSUBREDDITRSS_DIR . 'includes/Hooks/FeedCPT.php');
     }
 
-    public function registerDeactivationHook(){
+    public function registerDeactivationHook() {}
 
-    }
-
-    public function renderAdminMenu(){
-
-    }
+    public function renderAdminMenu() {}
 }
 
 (new WPRBSUBREDDITRSS())->boot();
